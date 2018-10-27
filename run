@@ -1,0 +1,20 @@
+#!/usr/bin/env php
+<?php
+
+require __DIR__ . '/vendor/autoload.php';
+
+$checkers = [
+    \App\CheckMod3And5::class,
+    \App\CheckMod3::class,
+    \App\CheckMod5::class,
+];
+
+foreach (range(1, 100) as $number) {
+    foreach ($checkers as $checker) {
+        if ($checker::check($number)) {
+            echo $checker::TEXT . PHP_EOL;
+            continue 2;
+        }
+    }
+    echo $number . PHP_EOL;
+}
